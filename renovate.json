@@ -1,0 +1,50 @@
+{
+  "$schema": "https://renovatebot.com",
+  "extends": [
+    "config:recommended"
+  ],
+  "prConcurrentLimit": 0,
+  "prHourlyLimit": 0,
+  "dependencyDashboard": true,
+  "timezone": "Europe/Berlin",
+  "schedule": [
+    "* 21 * * *"
+  ],
+  "docker-compose": {
+    "managerFilePatterns": [
+      "/(^|/)docker-compose[^/]*\\.ya?ml$/"
+    ]
+  },
+  "packageRules": [
+    {
+      "groupName": "Bookstack",
+      "matchPackageNames": [
+        "/^lscr\\.io/linuxserver/bookstack//"
+      ]
+    },
+    {
+      "groupName": "Homepage",
+      "matchPackageNames": [
+        "/^ghcr\\.io/gethomepage/homepage//"
+      ]
+    },
+    {
+      "groupName": "Immich Core Suite",
+      "matchPackageNames": [
+        "/^ghcr\\.io/immich-app//"
+      ]
+    },
+    {
+      "groupName": "Jellyfin",
+      "matchPackageNames": [
+        "/^jellyfin/jellyfin//"
+      ]
+    },
+    {
+      "groupName": "Paperless",
+      "matchPackageNames": [
+        "/^ghcr\\.io/paperless-ngx/paperless-ngx//"
+      ]
+    }
+]
+}
