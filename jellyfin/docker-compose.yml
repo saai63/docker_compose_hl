@@ -1,0 +1,44 @@
+services:
+  jellyfin:
+    image: jellyfin/jellyfin:12.2
+    container_name: jellyfin
+    user: 1000:1000
+    group_add:
+      - "992"
+    dns:
+      - 1.1.1.1
+      - 8.8.8.8
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+    volumes:
+      - $JELLYFIN_PATH/config:/config
+      - $JELLYFIN_PATH/cache:/cache
+      - type: bind
+        source: $MOVIES
+        target: /movies
+      - type: bind
+        source: $MOVIES_OTHER
+        target: /movies_other
+      - type: bind
+        source: $TV
+        target: /tv
+      - type: bind
+        source: $HDD_MOVIES
+        target: /hdd_movies
+      - type: bind
+        source: $HDD_TV
+        target: /hdd_tv
+      - type: bind
+        source: ./playlists
+        target: /vodafone_playlists
+      - type: bind
+        source: $MUSIC
+        target: /music
+      - type: bind
+        source: ./trakt_recommendations/movies 
+        target: /trakt_recommendations_movies
+    ports:
+      - 8096:8096
+    devices:
+      - /dev/dri/renderD128:/dev/dri/renderD128
+    restart: 'unless-stopped'

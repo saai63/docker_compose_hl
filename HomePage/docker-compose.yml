@@ -1,0 +1,19 @@
+services:
+  homepage:
+    image: ghcr.io/gethomepage/homepage:v2.6.0
+    container_name: homepage
+    ports:
+      - 3000:3000
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+    volumes:
+      - ./config:/app/config # Make sure your local config directory exists
+      - /var/run/docker.sock:/var/run/docker.sock # (optional) For docker integrations, see alternative methods
+      - $HDD_1:$HDD_1:ro
+      - $HDD_2:$HDD_2:ro
+      - ./icons:/app/public/images
+    environment:
+      PUID: $PUID
+      PGID: $PGID
+      HOMEPAGE_ALLOWED_HOSTS: home.saai63.duckdns.org
+    restart: always

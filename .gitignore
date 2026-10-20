@@ -1,0 +1,13 @@
+# Ignore all by default
+*
+
+!*/
+
+## Allowlist
+!.gitignore
+!renovate.json
+!bookstack/docker-compose.yml
+!HomePage/docker-compose.yml
+!immich/docker-compose.yml
+!jellyfin/docker-compose.yml
+!paperless-ngx/docker-compose.yml

@@ -1,0 +1,26 @@
+services:
+  broker:
+    env_file: docker-compose.env
+    image: docker.io/library/redis:8
+    restart: unless-stopped
+    volumes:
+      - redisdata:/data
+  webserver:
+    image: ghcr.io/paperless-ngx/paperless-ngx:3.2.1
+    restart: unless-stopped
+    depends_on:
+      - broker
+    ports:
+      - "8092:8000"
+    env_file: docker-compose.env
+    volumes:
+      - data:/usr/src/paperless/data
+      - media:/usr/src/paperless/media
+      - ${MY_PAPERLESS_NGX_PATH}/export:/usr/src/paperless/export
+      - ${MY_PAPERLESS_NGX_PATH}/consume:/usr/src/paperless/consume
+    environment:
+      PAPERLESS_REDIS: redis://broker:6379
+volumes:
+  data:
+  media:
+  redisdata:
